@@ -261,8 +261,7 @@ main{max-width:var(--container-max);margin:0 auto;padding-top:8px}
 .proto kbd{font:11px "Geist Mono",ui-monospace,monospace;border:1px solid var(--line);padding:1px 5px;margin-left:auto}
 /* square corners everywhere */
 *,*::before,*::after{border-radius:0!important}
-/* V1: top-left corner cut parallel to the logo's top-left edge (30° from horizontal, measured from the logo): 48px across, 27.71px down */
-.v1 .chrome{clip-path:polygon(48px 0,100% 0,100% 100%,0 100%,0 27.71px);box-shadow:none;outline:1px solid #E3E9F2;outline-offset:-1px}
+/* V1: square nav corner (notch removed) */
 /* V1: rail width 64px */
 .v1 .rail{width:64px}
 .v1 .tip{left:52px}
@@ -334,6 +333,85 @@ main{max-width:var(--container-max);margin:0 auto;padding-top:8px}
 .proto .pp-head b{font-size:13px}
 .proto .pp-head button{width:28px;height:28px;display:grid;place-items:center;font-size:13px;color:var(--muted)}
 .proto .pp-head button:hover{background:#F5F7FB;color:var(--ink)}
+
+/* =====================================================================
+   V5 · BOTTOM NAV + EDGE AI — floating dock with scope, product areas,
+   an AI search/command field and the primary action
+   ===================================================================== */
+.v5 .app{flex-direction:column;gap:0;padding:0 var(--container-pad) 0 var(--container-pad);min-height:100vh}
+.v5 .chrome{position:fixed;left:50%;bottom:16px;top:auto;transform:translateX(-50%);width:min(1240px,calc(100vw - 32px));height:auto;background:transparent;box-shadow:none;z-index:70}
+.v5 .rail{width:100%;height:68px;flex-direction:row;align-items:center;gap:8px;padding:0 10px 0 12px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);color:var(--ink);border:1px solid var(--line);box-shadow:0 18px 50px rgba(6,40,120,.18),0 2px 6px rgba(16,24,40,.06)}
+.v5 .logo{width:40px;height:40px;margin:0;background:var(--blue)}
+.v5 .logo img{width:34px;height:34px}
+.v5 .tb-scope .lpbtn{height:40px;width:auto;min-width:180px;font-weight:600}
+.v5 .tb-scope .lpstatic{height:40px}
+.v5 .dk-nav{display:flex;gap:2px;height:100%;align-items:stretch;padding:0 6px;border-left:1px solid var(--line);border-right:1px solid var(--line);margin:0 4px}
+.v5 .dk-nav>span{display:flex}
+.v5 .rbtn{width:auto;min-width:64px;height:100%;margin:0;padding:8px 8px 6px;flex-direction:column;gap:4px;justify-content:center;color:#3A4150;position:relative}
+.v5 .rbtn .lbl{display:block;font-size:11px;font-weight:500;white-space:nowrap}
+.v5 .rbtn svg.i{width:20px!important;height:20px!important}
+.v5 .rbtn:hover{background:#F2F5FA}
+.v5 .rbtn:active{transform:none}
+.v5 .rbtn[aria-current="true"]{color:var(--blue);background:var(--blue-50)}
+.v5 .rbtn[aria-current="true"] .lbl{font-weight:700}
+.v5 .rbtn[aria-current="true"]::after{content:"";position:absolute;left:14px;right:14px;top:0;height:3px;background:var(--blue);animation:grow-x .25s var(--ease)}
+.v5 .rbtn .dot{top:9px;left:auto;right:18px;box-shadow:0 0 0 2px #fff}
+.v5 a.rbtn{color:#3A4150;text-decoration:none}
+.v5 .rbtn.ext .exi{position:absolute;top:8px;right:10px;display:inline-flex}
+.v5 .rbtn.ext .exi svg.i{width:11px!important;height:11px!important}
+.v5 .ai{flex:1;min-width:200px;position:relative}
+.v5 .ai-field{display:flex;align-items:center;gap:10px;height:44px;padding:0 12px;border:1.5px solid #C9D6EA;background:#fff;cursor:text;transition:border-color .15s,box-shadow .2s}
+.v5 .ai:hover .ai-field{border-color:#9DB7E2}
+.v5 .ai.on .ai-field{border-color:var(--blue);box-shadow:0 0 0 4px rgba(6,103,232,.14)}
+.v5 .ai-field input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:15px;background:transparent;color:var(--ink)}
+.v5 .ai-field input::placeholder{color:#6B7280}
+.ai-spark{display:inline-grid;place-items:center;width:22px;height:22px;color:#fff;font-size:12px;background:linear-gradient(135deg,#0667E8,#F038FF);flex:none}
+.ai-spark.spin{animation:aispin 1s linear infinite}
+@keyframes aispin{to{transform:rotate(360deg)}}
+.v5 .ai-field kbd{font:11px "Geist Mono",ui-monospace,monospace;color:var(--muted);border:1px solid var(--line);padding:1px 5px}
+.v5 .tb-move{display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;background:var(--blue);color:#fff;font-weight:700;white-space:nowrap;transition:background .15s,transform .15s,box-shadow .15s}
+.v5 .tb-move svg{fill:#fff}
+.v5 .tb-move:hover{background:var(--blue-600);transform:translateY(-1px);box-shadow:0 6px 16px rgba(6,103,232,.3)}
+.v5 .avatar{margin:0 0 0 4px;border-color:var(--line)}
+.v5 .avatar span{color:#fff}
+.v5 .mainwrap{padding-bottom:120px}
+.v5 main{padding-top:24px}
+.v5 .proto{bottom:100px}
+.v5 .tabs{margin-top:16px}
+/* AI panel */
+.aipanel{position:fixed;z-index:95;background:#fff;border:1px solid var(--line);box-shadow:0 24px 60px rgba(6,40,120,.22);overflow:auto;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .16s,transform .2s var(--ease)}
+.aipanel.open{opacity:1;transform:none;pointer-events:auto}
+.aihead{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:1}
+.aihead b{font-size:14px}
+.aiscope{margin-left:auto;font:11px "Geist Mono",ui-monospace,monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.aisec{font:11px "Geist Mono",ui-monospace,monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:10px 14px 4px}
+.aians{margin:12px 14px 4px;padding:12px 14px;background:linear-gradient(135deg,rgba(6,103,232,.06),rgba(240,56,255,.06));border-left:3px solid var(--blue)}
+.aians.miss{border-left-color:var(--orange)}
+.aians p{margin:0;font-size:14.5px;line-height:1.5;min-height:1.5em}
+.airank{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px}
+.airank td{padding:4px 0}
+.airank td:first-child{width:34%}
+.airank td:nth-child(2){padding:0 10px}
+.airank td:nth-child(2) i{display:block;height:8px;background:var(--blue);animation:grow-x .5s var(--ease);transform-origin:left}
+.airank td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.airow{display:flex;align-items:center;gap:12px;width:100%;padding:10px 14px;text-align:left;border-left:3px solid transparent}
+.airow.sel{background:#F2F6FD;border-left-color:var(--blue)}
+.airow[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.aiic{width:28px;height:28px;display:grid;place-items:center;background:var(--blue-50);color:var(--blue);flex:none;font-size:14px;font-weight:700}
+.airow.write .aiic{background:#FFF3E6;color:var(--orange)}
+.aitx{display:flex;flex-direction:column;min-width:0;flex:1}
+.aitx b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aitx small{font-size:12px;color:var(--muted)}
+.aienter{font:12px "Geist Mono",ui-monospace,monospace;color:var(--muted);border:1px solid var(--line);padding:1px 6px}
+.aiconf{font-size:12px;font-weight:700;color:var(--orange);border:1px solid #F5C99B;padding:3px 8px;background:#FFF8F0;white-space:nowrap}
+.aiconf.armed{background:var(--orange);color:#fff;border-color:var(--orange)}
+.aifoot{padding:10px 14px 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);margin-top:6px}
+.aishimmer{padding:16px 14px;display:grid;gap:8px}
+.aishimmer i{display:block;height:12px;background:linear-gradient(90deg,#EEF2F8 25%,#E0E8F5 50%,#EEF2F8 75%);background-size:200% 100%;animation:shim 1s linear infinite}
+.aishimmer i:nth-child(2){width:80%}.aishimmer i:nth-child(3){width:55%}
+@keyframes shim{to{background-position:-200% 0}}
+@media (max-width:1180px){.v5 .rbtn{min-width:52px}.v5 .rbtn .lbl{display:none}.v5 .tb-move span{display:none}.v5 .tb-scope .lpbtn{min-width:0}}
+@media (max-width:760px){.v5 .chrome{width:calc(100vw - 16px);bottom:8px}.v5 .dk-nav{display:none}.v5 .logo{display:none}.v5 .ai-field kbd{display:none}}
 </style>
 </head>
 <body class="v4">
@@ -353,14 +431,14 @@ main{max-width:var(--container-max);margin:0 auto;padding-top:8px}
     <h4>View as (permissions)</h4>
     <div id="roles"></div>
     <label class="gtog"><input type="checkbox" id="gridTog"> Show layout grid <kbd>⇧G</kbd></label>
-    <div class="sw"><a href="./" title="All versions">⌂</a><a href="app.html?v=v1" data-v="v1">V1</a><a href="app.html?v=v2" data-v="v2">V2</a><a href="app.html?v=v4" data-v="v4">V4</a></div>
+    <div class="sw"><a href="./" title="All versions">⌂</a><a href="app.html?v=v1" data-v="v1">V1</a><a href="app.html?v=v2" data-v="v2">V2</a><a href="app.html?v=v4" data-v="v4">V4</a><a href="app.html?v=v5" data-v="v5">V5</a></div>
   </div>
   <button aria-expanded="false" id="protoBtn">⚙ Prototype</button>
 </div>
 
 <script>
-const LAYOUT=(()=>{const v=new URLSearchParams(location.search).get('v');return ['v1','v2','v4'].includes(v)?v:'v4'})();
-const VNAME={v1:'V1 · Left rail + sub-nav',v2:'V2 · Left rail + tabs',v4:'V4 · Top nav'}[LAYOUT];
+const LAYOUT=(()=>{const v=new URLSearchParams(location.search).get('v');return ['v1','v2','v4','v5'].includes(v)?v:(window.__DEFAULT_LAYOUT||'v4')})();
+const VNAME={v1:'V1 · Left rail + sub-nav',v2:'V2 · Left rail + tabs',v4:'V4 · Top nav',v5:'V5 · Bottom nav + AI'}[LAYOUT];
 document.body.className=LAYOUT;
 document.querySelectorAll('.sw a[data-v]').forEach(a=>a.classList.toggle('on',a.dataset.v===LAYOUT));
 const LOGO='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAFP0lEQVR4nO1aXUhbZxh+ThmDCo0j7mKQZHcN1QUUuijJbvwrTBopZJh4YZt40WrnjMxFHCbNzRSWLc1mwtS5iybDi6awM5yRCc6fGxNSvRFSXeNlEujFLJhCdvntonySxpzfnLhS+tye+H7fc773fb7nfY/Mu0PP8Cbgwv+9AaXwlsjrhnMh0qZPEE1DltRyjXdqGfyK9gnx2u6hUZtGoViP8OoEYZM2phZr1exEvH0+suLtQipjxtXxDBNedcNl+Q5b00bSpEsrfjqM0vLr7FwkX1gC+DtnwNfRWeSOda+cgOt6gIz2BsAm7QjF3ciXPZcLxYi06RPE03cPqosFTP46i1TGzLlBrTpLRnvvw2p6iNCKG+FVd9VkqiaiUWeJ1+ZDq34Hkc07CMfFb6pJmyZzd50ghEF4dQLV1E9VRFyWALnVuYiN/R5MRmdlb8JqihGX5Xsc5AyYefSNrHSTVezdzWtka+Zj0qpPYGQhwktCo84Sj81HrKZHnAXOJu3MwP3f8aL4HrZnjPA7xiTLtaQTadMnyKglgEZtGqH4BKKbt3nfHD2x+roCAGB9/1PBN65VZ8mU3YdGTVpSuokm4u3zEUfXIkJxt2AddDevEY/NC21DruJzMYpF040QBiM/P8BB1sC7piARITkthUadJX7nGNr0Cd6YAJD7RyfqjYuVa8Ea8dh8uAAGbLKflwQAXGtZE0UCALTvZ+F3uAQvyN+SdqQyZlhNMd7Yoor9Ut0J/A4X5u46eYswsnmb6Zjaxfp+j5iwAF4SWvZ0VyxwlyVAlr1dyB/rcJj7iDeOYGodLXxwZuNSclzDUSdcCK24cZgzwGPzIn/8IcJxN1IZM7P0lZWwCTvYpF1eanFsEktfWiEkqe2ePSa84pYU29UbgN/hQmRjCANBluFzCKWQbRrF5nho1c10TO2CTfaLjn2YMwhKezmqdr98OU6Re65jJqM/Mjem/0L+WFvtkhWhmI23mmLYnjFi9HqA83QOcgam3bPHTEZnUSiqJMW/dPGE97kgETk5vjVt5LQkGnWWXGteEx3P2blI9oJ68qJYj8cZM+fvBInIyXFaP+VyTeW08K8KN4MsAIBLrtv0CfKHp4s4O3/ByEIEA0GW4bvHJHktarulSiqbtKNVv/OKnGoasmR7xojLw88Y4KxcF4oqSW2BpBo5yBmYyMad04XEwmqKgU3088ppuVynjsxgk3bRa4gmUnrUA0EWN6Y3JKXb4yPu/C4FTWVq6fnEoxSCRDTqLJkfHiRzw06s7/eg3bvLpDJmhkqqVEsiBqVy/Zn5Ia94UAgSWfZ2obvlT9z8ga2Yr7nnOubz+QfMZHRW8TuCyvXTvAF+hwvdLWucZASJ0Kbop6FBQUuSynwia8NcuKJ9QpbGrcR4eQeFogoqnrtEdI2ItSRKoXwudpg38P5e8s0uxpJUA3oBXtGl0eHZFS2/skemVlMMVlMMoRU3UWIuVToXG1mI8M7FKqHq2a+rNwCrKUbCqxOy/p62x43atOS5WCkUGWLT+jmRaASBl6q4sd+DgSBb1akK1ogUSaUKJwVi5mLzw4OkUZNG/ljHGUeQCLXdteoj+Gqh1GReHc/wdouiVItOAqVYkmogZZJJIVp+a2lJKOgFeC49e60sSfkFeG49u9wpSTnkXoDlqLpnl9NBAkCTLg0AENsBCkGR4YOUKQmV029vjSEUd5+2BdXuQdGPoaVTknJCqrrCGTmVm0aVoPjHUIrS74QUqYz5tGdXer2aEaGgH25ST82Sp4dSUHMi54W3/4vyuuGNIfIf49MG/dwBZJIAAAAASUVORK5CYII=';
@@ -386,6 +464,8 @@ const P={
  check:'M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z',
  web:'M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z',
  ext:'M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z',
+ chevR:'M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z',
+ spark:'M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z',
  pin:'M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z',
  lock:'M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z',
  place:'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z'
@@ -411,7 +491,7 @@ const ROLES={
 };
 const RAIL=[
  {id:'facilities',n:'Facilities',i:'business'},{id:'tasks',n:'Tasks',i:'tasks',dot:1},{id:'revenue',n:'Revenue',i:'money'},
- {id:'comms',n:'Communications',i:'forum'},...(LAYOUT==='v4'?[{id:'analytics',n:'Analytics',i:'chart'},{id:'websites',n:'Websites',i:'web',ext:'https://www.storable.com/products/websites/'}]:[{id:'marketing',n:'Marketing',i:'campaign'},{id:'analytics',n:'Analytics',i:'chart'}])
+ {id:'comms',n:'Communications',i:'forum'},...(LAYOUT==='v4'||LAYOUT==='v5'?[{id:'analytics',n:'Analytics',i:'chart'},{id:'websites',n:'Websites',i:'web',ext:'https://www.storable.com/products/websites/'}]:[{id:'marketing',n:'Marketing',i:'campaign'},{id:'analytics',n:'Analytics',i:'chart'}])
 ];
 const RAIL2=[{id:'settings',n:'Settings',i:'settings'},{id:'help',n:'Help',i:'help'}];
 const NAV={
@@ -463,6 +543,20 @@ addEventListener('popstate',()=>{readHash();render(true)});
 function rbtn(r){if(r.ext)return `<a class="rbtn ext" href="${r.ext}" target="_blank" rel="noopener" aria-label="${r.n} (opens in a new tab)" title="${r.n} — opens in a new tab">${ic(r.i)}<span class="lbl">${r.n}</span><span class="exi">${ic('ext',14)}</span></a>`;return `<button class="rbtn" data-rail="${r.id}" aria-label="${r.n}" ${S.rail===r.id?'aria-current="true"':''}>${ic(r.i)}${r.dot?'<span class="dot"></span>':''}<span class="lbl">${r.n}</span>${LAYOUT==='v1'?`<span class="tip" role="tooltip">${r.n}</span>`:''}</button>`}
 function renderRail(){
   const rail=$('#rail');
+  if(LAYOUT==='v5'){
+   rail.innerHTML=`<div class="logo"><img src="${LOGO}" alt="Storable"></div>
+    <div class="tb-scope">${picker('tb')}</div>
+    <div class="dk-nav" role="list">${RAIL.filter(r=>railOK(r.id)).map(r=>`<span role="listitem">${rbtn(r)}</span>`).join('')}</div>
+    <div class="ai" id="ai">
+      <div class="ai-field"><span class="ai-spark" aria-hidden="true">✦</span>
+        <input id="aiq" type="text" autocomplete="off" spellcheck="false" placeholder="Ask Edge AI or search…" aria-label="Ask Edge AI or search" aria-expanded="false" aria-controls="aipanel" role="combobox" aria-autocomplete="list">
+        <kbd>⌘K</kbd></div>
+    </div>
+    <button class="tb-move" data-movein>${ic('box',18)}<span>Move in</span></button>
+    <div class="avatar" title="Alex Morgan · ${role().n}"><span>AM</span></div>`;
+   rail.querySelectorAll('[data-rail]').forEach(b=>b.onclick=()=>{const r=b.dataset.rail;aiClose();go(r,NAV[r][0].items.find(i=>!hidden(i.id)).id)});
+   rail.querySelector('.tb-move').onclick=e=>{e.stopPropagation();moveIn()};
+   bindPickers(rail);bindAI();return}
   if(LAYOUT==='v4'){
    rail.innerHTML=`<div class="logo"><img src="${LOGO}" alt="Storable"></div>
     <div class="tb-scope">${picker('tb')}</div>
@@ -661,10 +755,92 @@ function page(){
 }
 
 /* ---------- main render ---------- */
+
+/* =================== V5 · Edge AI (simulated, runs locally) =================== */
+const AI={open:false,sel:0,items:[],timer:null};
+const PAGE_SYN={leads:['lead','leads','prospect','prospects','inquiries'],reservations:['reservation','reservations','reserved'],'move-ins':['move-ins','move ins','moveins'],'future-move-ins':['future move','upcoming move'],units:['unit','units','vacancy','vacant','occupancy'],'facility-map':['map','facility map','site map'],'tiered-pricing':['pricing','tiered','rates'],'revenue-mgmt':['revenue management','revenue mgmt','rate management'],billing:['billing','invoices','invoice'],payments:['payment','payments','collections','collected'],delinquency:['delinquency','delinquent','past due','late payers','overdue'],'lien-auction':['lien','auction'],tenants:['tenant','tenants','customers','renters'],home:['home','dashboard','overview'],reports:['report','reports'],insurance:['insurance'],access:['gate','access','codes'],'walk-through':['walk through','walkthrough','inspection'],'unit-groups':['unit groups'],'my-tasks':['task','tasks','todo','to-do']};
+const METRIC={pd:{n:'past due balance',f:f=>f.pd,fmt:v=>money(v),k:['past due','delinquen','owed','overdue','balance']},occ:{n:'physical occupancy',f:f=>f.o/f.u*100,fmt:v=>v.toFixed(1)+'%',k:['occupancy','occupied','full']},vac:{n:'vacant units',f:f=>f.u-f.o,fmt:v=>v+' units',k:['vacant','vacancy','empty','available']},ld:{n:'open leads',f:f=>f.ld,fmt:v=>v+' leads',k:['lead','prospect']},ol:{n:'overlocked units',f:f=>f.ol,fmt:v=>v+' units',k:['overlock']},mr:{n:'units needing make-ready',f:f=>f.mr,fmt:v=>v+' units',k:['make ready','make-ready','cleaning']},cr:{n:'collection rate',f:f=>f.col/f.bil*100,fmt:v=>v.toFixed(1)+'%',k:['collection rate','collect']}};
+const norm=s=>s.toLowerCase().replace(/[’']/g,'').replace(/\s+/g,' ').trim();
+function findFacs(q){const out=[];for(const f of allowed())if(q.includes(f.n.toLowerCase()))out.push({t:'fac',id:f.id,n:f.n});for(const g of GROUPS)if(q.includes(g.n.toLowerCase())||q.includes(g.n.split(' ')[0].toLowerCase()+' region'))out.push({t:'grp',id:g.id,n:g.n});if(/\ball (facilities|locations|sites)\b|\beverywhere\b|\bportfolio\b/.test(q))out.push({t:'all',id:'all',n:'All facilities'});return out}
+function findPages(q){const out=[];for(const [id,syn] of Object.entries(PAGE_SYN)){if(syn.some(s=>q.includes(s))){const f=findItem(id);if(f)out.push({id,n:f.it.n,rail:f.rail,grp:f.grp.n,locked:hidden(id)})}}return out}
+function scopeName(id){return id==='all'?'All facilities':(GROUPS.find(g=>g.id===id)||FAC.find(f=>f.id===id)||{n:id}).n}
+function aiParse(raw){
+  const q=norm(raw);const R={q:raw,answer:null,actions:[],pages:[],facs:[]};if(!q)return R;
+  const facs=findFacs(q),pages=findPages(q);const target=facs[0];
+  const isQ=/^(which|what|who|how|where|when|is|are|do|does|show me the|top|rank|compare)\b|\?$/.test(q);
+  const wantsMove=/\bmove[- ]?in\b|\brent (a )?unit\b|\bnew rental\b/.test(q)&&!/\bmove[- ]?ins\b/.test(q);
+  const wantsTask=/\b(remind|create (a )?task|add (a )?task|todo|to-do)\b/.test(q);
+  const metric=Object.entries(METRIC).find(([k,m])=>m.k.some(w=>q.includes(w)));
+  const tgtScope=target?target.id:S.scope;
+  // 1) questions → answer computed from data in scope
+  if(isQ&&metric){const [mk,m]=metric;const fs=(target&&target.t!=='all'?(target.t==='grp'?allowed().filter(f=>GROUPS.find(g=>g.id===target.id).ids.includes(f.id)):allowed().filter(f=>f.id===target.id)):scopeFacs());
+    const low=/\b(least|lowest|fewest|worst collection|min)\b/.test(q)&&mk!=='pd';const rk=[...fs].sort((a,b)=>low?m.f(a)-m.f(b):m.f(b)-m.f(a));
+    const top=rk[0];const total=['pd','vac','ld','ol','mr'].includes(mk)?fs.reduce((a,f)=>a+m.f(f),0):null;
+    R.answer={text:fs.length>1?`${top.n} has the ${low?'lowest':'highest'} ${m.n}: ${m.fmt(m.f(top))}.${total!==null?` Across ${fs.length} facilities the total is ${m.fmt(total)}.`:''}`:`${top.n}: ${m.n} is ${m.fmt(m.f(top))}.`,scope:fs.length>1?`Across ${fs.length} facilities you can access`:top.n,rows:rk.slice(0,5).map(f=>[f.n,m.fmt(m.f(f)),m.f(f)/Math.max(...rk.map(m.f))])};
+    const page={pd:'delinquency',occ:'units',vac:'units',ld:'leads',ol:'delinquency',mr:'units',cr:'payments'}[mk];
+    if(!hidden(page))R.actions.push({icon:'chart',label:`Open ${findItem(page).it.n}`,sub:fs.length>1?'Ranked across facilities':top.n,run:()=>{if(fs.length===1)setScope(top.id);go(findItem(page).rail,page)}});
+    if(fs.length>1)R.actions.push({icon:'place',label:`Switch to ${top.n}`,sub:'Change facility scope',run:()=>setScope(top.id)});
+  }
+  // 2) move-in (write action → needs confirmation)
+  if(wantsMove){const fid=target&&target.t==='fac'?target.id:(isSingle()?scopeFacs()[0].id:null);
+    R.actions.unshift(fid?{icon:'box',label:`Start a move-in at ${FAC.find(f=>f.id===fid).n}`,sub:`${(f=>f.u-f.o)(FAC.find(f=>f.id===fid))} vacant units · opens the move-in form`,write:true,run:()=>moveIn(fid)}:{icon:'box',label:'Start a move-in',sub:'You’ll choose the facility next',write:true,run:()=>moveIn()});
+    if(!R.answer)R.answer={text:fid?`I can start a move-in at ${FAC.find(f=>f.id===fid).n}. Confirm to open the form — nothing is saved until you finish it.`:'Move-ins happen at one facility. Confirm and I’ll ask which one.',scope:fid?FAC.find(f=>f.id===fid).n:scopeLabel()}}
+  // 3) tasks (write)
+  if(wantsTask){const title=raw.replace(/^(remind me to|create (a )?task( to)?|add (a )?task( to)?)/i,'').trim()||'New task';
+    R.actions.unshift({icon:'tasks',label:`Create task: “${title.slice(0,48)}”`,sub:target?`At ${target.n}`:`Scope: ${scopeLabel()}`,write:true,run:()=>{TASKS.unshift({t:title.slice(0,60),f:target&&target.t==='fac'?target.id:null,due:'Today'});render(false);flash('Task created')}});
+    if(!R.answer)R.answer={text:`I’ll add “${title.slice(0,60)}” to Tasks${target?' for '+target.n:''}. Confirm to create it.`,scope:target?target.n:scopeLabel()}}
+  // 4) navigation commands ("show leads at eastside", "open delinquency")
+  const seen=new Set(R.actions.map(x=>x.label));
+  for(const p of pages){if(R.answer&&R.answer.rows&&seen.has(`Open ${p.n}`))continue;if(p.locked){R.actions.push({icon:'lock',label:`${p.n} isn’t available for your role`,sub:'Ask a corporate admin for access',disabled:true});continue}
+    const where=target?scopeName(target.id):scopeLabel();
+    R.actions.push({icon:'chevR',label:`Go to ${p.grp?p.grp+' › ':''}${p.n}`,sub:target?`Switches scope to ${where}`:`Scope: ${where}`,run:()=>{if(target)S.scope=target.id;go(p.rail,p.id)}})}
+  // 5) scope switches
+  for(const f of facs)if(!pages.length&&!wantsMove)R.actions.push({icon:'place',label:`Switch to ${f.n}`,sub:f.t==='fac'?FAC.find(x=>x.id===f.id).city:f.t==='grp'?'Facility group':'Every facility you can access',run:()=>setScope(f.id)});
+  // 6) plain search fallback over facilities, pages and tenants
+  if(!R.actions.length&&!R.answer){
+    for(const f of allowed())if(f.n.toLowerCase().includes(q)||f.city.toLowerCase().includes(q))R.facs.push(f);
+    for(const k in NAV)for(const g of NAV[k])for(const it of g.items)if(!hidden(it.id)&&it.n.toLowerCase().includes(q))R.pages.push({id:it.id,n:it.n,rail:k,grp:g.n});
+    const tn=NAMES.filter(n=>n.toLowerCase().includes(q));
+    R.facs.forEach(f=>R.actions.push({icon:'place',label:f.n,sub:f.city+' · switch scope',run:()=>setScope(f.id)}));
+    R.pages.forEach(p=>R.actions.push({icon:'chevR',label:p.n,sub:(p.grp||'')+' page',run:()=>go(p.rail,p.id)}));
+    tn.forEach(n=>R.actions.push({icon:'forum',label:n,sub:'Tenant · open profile',run:()=>flash(`Tenant profile for ${n} would open here`)}));
+    if(!R.actions.length)R.answer={text:`I couldn’t match “${raw}” to a page, facility or action. Try “show leads at Eastside”, “which facility has the most past due?” or “start a move-in at Northgate”.`,scope:scopeLabel(),miss:true};
+  }
+  return R}
+const SUGG=['Which facility has the most past due?','Show leads at Eastside','Start a move-in at Northgate','Switch to North region','Which facility has the most vacant units?','Remind me to call James tomorrow'];
+function aiPanel(){let p=$('#aipanel');if(!p){p=document.createElement('div');p.id='aipanel';p.className='aipanel';p.setAttribute('role','listbox');p.setAttribute('aria-label','Edge AI results');document.body.appendChild(p);p.onclick=e=>e.stopPropagation()}return p}
+function aiPlace(){const f=$('#ai');if(!f)return;const r=f.getBoundingClientRect(),p=aiPanel(),w=Math.min(560,innerWidth-16);let left=r.left+r.width/2-w/2;left=Math.max(8,Math.min(left,innerWidth-8-w));Object.assign(p.style,{left:left+'px',width:w+'px',bottom:(innerHeight-r.top+10)+'px',maxHeight:(r.top-24)+'px'})}
+function aiClose(){AI.open=false;const p=$('#aipanel');if(p)p.classList.remove('open');const i=$('#aiq');if(i)i.setAttribute('aria-expanded','false');$('#ai')&&$('#ai').classList.remove('on')}
+function aiShow(q){AI.open=true;const p=aiPanel();aiPlace();p.classList.add('open');$('#aiq').setAttribute('aria-expanded','true');$('#ai').classList.add('on');
+  clearTimeout(AI.timer);
+  if(!q.trim()){AI.items=SUGG.map(s=>({icon:'spark',label:s,sub:'Try this',fill:s}));AI.sel=0;p.innerHTML=`<div class="aihead"><span class="ai-spark">✦</span><b>Edge AI</b><span class="aiscope">Scope: ${esc(scopeLabel())}</span></div><div class="aisec">Try asking</div>${AI.items.map((a,i)=>aiRow(a,i)).join('')}<div class="aifoot">Search pages, facilities and tenants, ask about your data, or tell Edge what to do. Actions that change data always ask you to confirm first.</div>`;bindRows();return}
+  p.innerHTML=`<div class="aihead"><span class="ai-spark spin">✦</span><b>Edge AI</b><span class="aiscope">Thinking…</span></div><div class="aishimmer"><i></i><i></i><i></i></div>`;
+  AI.timer=setTimeout(()=>{const R=aiParse(q);AI.items=R.actions;AI.sel=AI.items.findIndex(a=>!a.disabled);if(AI.sel<0)AI.sel=0;
+    p.innerHTML=`<div class="aihead"><span class="ai-spark">✦</span><b>Edge AI</b><span class="aiscope">${esc(R.answer?R.answer.scope:scopeLabel())}</span></div>
+      ${R.answer?`<div class="aians ${R.answer.miss?'miss':''}"><p id="aitext" aria-live="polite"></p>${R.answer.rows?`<table class="airank">${R.answer.rows.map(([n,v,w])=>`<tr><td>${esc(n)}</td><td><i style="width:${Math.max(4,w*100)}%"></i></td><td>${esc(v)}</td></tr>`).join('')}</table>`:''}</div>`:''}
+      ${AI.items.length?`<div class="aisec">${R.answer?'Next steps':'Results'}</div>${AI.items.map((a,i)=>aiRow(a,i)).join('')}`:''}
+      <div class="aifoot">Simulated AI for this prototype — answers come from the sample data. ↑↓ to move · Enter to run · Esc to close</div>`;
+    bindRows();if(R.answer)typeOut($('#aitext'),R.answer.text);announce(R.answer?R.answer.text:`${AI.items.length} results`)},420)}
+function aiRow(a,i){return `<button class="airow ${i===AI.sel?'sel':''} ${a.write?'write':''}" role="option" aria-selected="${i===AI.sel}" data-ai="${i}" ${a.disabled?'aria-disabled="true"':''}><span class="aiic">${a.icon==='spark'?'✦':a.icon==='chevR'?'→':ic(a.icon,16)}</span><span class="aitx"><b>${esc(a.label)}</b><small>${esc(a.sub||'')}</small></span>${a.write?'<span class="aiconf">Confirm</span>':a.fill?'':'<span class="aienter">↵</span>'}</button>`}
+function bindRows(){aiPanel().querySelectorAll('[data-ai]').forEach(b=>{b.onmouseenter=()=>{AI.sel=+b.dataset.ai;mark()};b.onclick=()=>aiRun(+b.dataset.ai)})}
+function mark(){aiPanel().querySelectorAll('[data-ai]').forEach(b=>{const on=+b.dataset.ai===AI.sel;b.classList.toggle('sel',on);b.setAttribute('aria-selected',on);if(on)b.scrollIntoView({block:'nearest'})})}
+function aiRun(i){const a=AI.items[i];if(!a||a.disabled)return;if(a.fill){$('#aiq').value=a.fill;aiShow(a.fill);$('#aiq').focus();return}
+  if(a.write&&!a.armed){a.armed=true;const b=aiPanel().querySelector(`[data-ai="${i}"] .aiconf`);if(b){b.textContent='Press again to confirm';b.classList.add('armed')}return}
+  aiClose();$('#aiq').value='';a.run()}
+function typeOut(el,txt){if(!el)return;let i=0;el.textContent='';const step=()=>{i+=Math.max(1,Math.round(txt.length/60));el.textContent=txt.slice(0,i);if(i<txt.length)requestAnimationFrame(step)};if(matchMedia('(prefers-reduced-motion: reduce)').matches)el.textContent=txt;else step()}
+let aiDeb;
+function bindAI(){const i=$('#aiq');if(!i)return;
+  i.onfocus=()=>aiShow(i.value);i.onclick=e=>e.stopPropagation();
+  i.oninput=()=>{clearTimeout(aiDeb);aiDeb=setTimeout(()=>aiShow(i.value),180)};
+  i.onkeydown=e=>{if(e.key==='ArrowDown'){e.preventDefault();AI.sel=Math.min(AI.items.length-1,AI.sel+1);mark()}else if(e.key==='ArrowUp'){e.preventDefault();AI.sel=Math.max(0,AI.sel-1);mark()}else if(e.key==='Enter'){e.preventDefault();if(AI.items.length)aiRun(AI.sel)}else if(e.key==='Escape'){aiClose();i.blur()}};
+  $('#ai').onclick=e=>{e.stopPropagation();i.focus()}}
+document.addEventListener('click',()=>{if(AI.open)aiClose()});
+addEventListener('resize',()=>{if(AI.open)aiPlace()});
+addEventListener('keydown',e=>{if(LAYOUT!=='v5')return;if(((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k')||(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName))){e.preventDefault();e.stopImmediatePropagation();$('#aiq')&&$('#aiq').focus()}},true);
 /* portal the facility popover to <body> so the clipped/scrolling sidebar can't cut it off */
 function placePop(btn,pop){if(pop.parentElement!==document.body)document.body.appendChild(pop);
  const r=btn.getBoundingClientRect(),w=Math.max(r.width,300);let left=r.left;if(left+w>innerWidth-8)left=innerWidth-8-w;
- Object.assign(pop.style,{position:'fixed',left:Math.max(8,left)+'px',top:(r.bottom+6)+'px',width:w+'px',maxHeight:(innerHeight-r.bottom-24)+'px',overflow:'auto'})}
+ const up=innerHeight-r.bottom<320;Object.assign(pop.style,{position:'fixed',left:Math.max(8,left)+'px',top:up?'auto':(r.bottom+6)+'px',bottom:up?(innerHeight-r.top+8)+'px':'auto',width:w+'px',maxHeight:(up?r.top-24:innerHeight-r.bottom-24)+'px',overflow:'auto',transformOrigin:up?'bottom left':'top left'})}
 addEventListener('resize',()=>closePops());
 document.addEventListener('scroll',e=>{if(!e.target.closest||!e.target.closest('.pop'))closePops()},true);
 function render(anim){
@@ -684,7 +860,7 @@ function render(anim){
      <div class="head"><h1 id="h1" tabindex="-1">${f.it.n}</h1>${showPicker?picker('sm'):''}<button class="primary" data-movein>${ic('box')}Move in</button></div>
      <div class="view" ${anim?'':'style="animation:none"'}>${S.rail==='tasks'&&S.page==='my-tasks'?home().replace(/^[\s\S]*?<aside/,'<div style="max-width:560px"><aside').replace(/<\/aside><\/div>$/,'</aside></div>'):page()}</div>`;
   }else{
-    main.innerHTML=`<div class="head"><h1 id="h1" tabindex="-1">${railN}</h1>${showPicker&&LAYOUT!=='v4'?picker('sm'):''}${LAYOUT==='v4'?'':`<button class="primary" data-movein>${ic('box')}Move in</button>`}</div>
+    main.innerHTML=`<div class="head"><h1 id="h1" tabindex="-1">${railN}</h1>${showPicker&&LAYOUT!=='v4'&&LAYOUT!=='v5'?picker('sm'):''}${LAYOUT==='v4'||LAYOUT==='v5'?'':`<button class="primary" data-movein>${ic('box')}Move in</button>`}</div>
      ${renderTabs()}
      ${S.page!==NAV[S.rail][0].items[0].id?`<div class="subhead"><nav class="crumb" aria-label="Breadcrumb">${f.grp.n?`<span>${f.grp.n}</span><span aria-hidden="true">›</span>`:''}<b aria-current="page">${f.it.n}</b></nav></div>`:''}
      <div class="view" ${anim?'':'style="animation:none"'}>${S.rail==='tasks'&&S.page==='my-tasks'?home().replace(/^[\s\S]*?<aside/,'<div style="max-width:560px"><aside').replace(/<\/aside><\/div>$/,'</aside></div>'):page()}</div>`;
@@ -712,8 +888,8 @@ function bindMain(m){
 
 /* ---------- move-in modal ---------- */
 let lastFocus;
-function moveIn(){
-  const fs=scopeFacs();lastFocus=document.activeElement;
+function moveIn(pre){
+  const fs=pre?FAC.filter(f=>f.id===pre):scopeFacs();lastFocus=document.activeElement;
   const single=fs.length===1;
   $('#modal').innerHTML=`<header><h2 id="mt">Start a move-in</h2><p>${single?`At <b>${esc(fs[0].n)}</b>`:'Move-ins happen at one facility. Choose where this tenant is moving in.'}</p></header>
    <div class="bd">${single?`<label class="radio"><input type="radio" name="mf" value="${fs[0].id}" checked>${fs[0].n}<small>${fs[0].u-fs[0].o} vacant</small></label>`:fs.map(f=>`<label class="radio"><input type="radio" name="mf" value="${f.id}">${f.n}<small>${f.u-f.o} vacant</small></label>`).join('')}</div>
