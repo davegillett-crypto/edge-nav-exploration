@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storable Edge · Navigation exploration</title>
+<style>
+:root{color-scheme:light;--blue:#0667E8;--ink:#121212;--muted:#5C5C5C;--line:#E0E0E0;--bg:#F8F8F8;--subtle:#EBF3FF;--lime:#E1FF00}
+*{box-sizing:border-box;border-radius:0}
+body{margin:0;font-family:"Geist",Inter,-apple-system,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+header{background:var(--blue);color:#fff;padding:48px 24px 40px}
+.wrap{max-width:79.5rem;margin:0 auto;padding:0 24px}
+h1{margin:0;font-size:51px;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.meta{font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;margin-top:14px;line-height:1.7}
+main{padding:40px 0 80px}
+h2{font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:400;margin:32px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+a.card{grid-column:span 4;display:flex;flex-direction:column;gap:8px;padding:20px;background:#fff;border:1px solid var(--line);text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .2s,transform .15s;min-height:170px}
+a.card:hover{border-color:#B3D3FF;box-shadow:0 10px 24px rgba(18,18,18,.08);transform:translateY(-2px)}
+a.card:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.tag{align-self:flex-start;font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;padding:2px 8px;background:var(--subtle);color:var(--blue)}
+.tag.x{background:#F4EFEA;color:#4F4439}
+a.card b{font-size:21px;font-weight:600;letter-spacing:-.01em}
+a.card p{margin:0;font-size:14px;line-height:1.5;color:var(--muted)}
+a.card .go{margin-top:auto;font-size:14px;color:#073EC5;font-weight:600}
+.wide{grid-column:span 6!important}
+.note{margin-top:32px;font-size:14px;color:var(--muted);line-height:1.6;max-width:760px}
+kbd{font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;border:1px solid var(--line);padding:1px 5px;background:#fff}
+@media (max-width:1000px){a.card{grid-column:span 6}.wide{grid-column:span 12!important}}
+@media (max-width:640px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}a.card,.wide{grid-column:span 4!important}h1{font-size:38px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Edge navigation exploration</h1>
+  <div class="meta">Multi-facility scope · two-tier navigation · permission-aware<br>Interactive prototypes · Storable Web Toolkit tokens · Geist</div>
+</div></header>
+<main class="wrap">
+  <h2>Prototypes</h2>
+  <div class="grid three">
+    <a class="card" href="app.html?v=v1"><span class="tag">V1</span><b>Left rail + sub-nav</b><p>64px product rail with a sidebar of sections and pages. The facility switcher sits at the top of the sidebar.</p><span class="go">Open prototype →</span></a>
+    <a class="card" href="app.html?v=v2"><span class="tag">V2</span><b>Left rail + tabs</b><p>The rail expands on hover as an overlay that doesn't push the content. Sections are tabs with page menus.</p><span class="go">Open prototype →</span></a>
+    <a class="card" href="app.html?v=v4"><span class="tag">V4</span><b>Top nav</b><p>A global top bar holds the facility scope, product areas, Move in, search and utilities. Section tabs sit below.</p><span class="go">Open prototype →</span></a>
+  </div>
+  <p class="note"><b>Tips for reviewers:</b> use the <b>⚙ Prototype</b> button (bottom right) in any prototype to switch versions or view as Corporate admin, Regional manager or Leasing agent. <kbd>⇧G</kbd> toggles the layout grid. Everything uses sample data, and nothing is saved.</p>
+</main>
+</body>
+</html>
