@@ -412,6 +412,74 @@ main{max-width:var(--container-max);margin:0 auto;padding-top:8px}
 @keyframes shim{to{background-position:-200% 0}}
 @media (max-width:1180px){.v5 .rbtn{min-width:52px}.v5 .rbtn .lbl{display:none}.v5 .tb-move span{display:none}.v5 .tb-scope .lpbtn{min-width:0}}
 @media (max-width:760px){.v5 .chrome{width:calc(100vw - 16px);bottom:8px}.v5 .dk-nav{display:none}.v5 .logo{display:none}.v5 .ai-field kbd{display:none}}
+
+/* =====================================================================
+   THEME LAYER — Slate primary + Blue highlight (switchable in the demo)
+   --primary drives chrome & primary actions; --blue is the highlight
+   ===================================================================== */
+:root{--primary:#1E293B;--blue:#0667E8;
+  --primary-600:color-mix(in srgb,var(--primary) 82%,#000);
+  --primary-soft:color-mix(in srgb,var(--primary) 8%,#fff);
+  --blue-600:color-mix(in srgb,var(--blue) 82%,#000);
+  --blue-50:color-mix(in srgb,var(--blue) 10%,#fff);
+  --blue-25:color-mix(in srgb,var(--primary) 3%,#fff);
+  --hl-ring:color-mix(in srgb,var(--blue) 18%,transparent)}
+.rail{background:var(--primary)}
+.rbtn .dot{box-shadow:0 0 0 2px var(--primary)}
+.head h1{color:var(--primary)}
+.primary{background:var(--primary);box-shadow:0 2px 6px color-mix(in srgb,var(--primary) 30%,transparent)}
+.primary:hover{background:var(--primary-600);box-shadow:0 6px 16px color-mix(in srgb,var(--primary) 32%,transparent)}
+.proto .sw a.on{background:var(--primary);border-color:var(--primary)}
+.lpbtn[aria-expanded="true"],.v5 .ai.on .ai-field{box-shadow:0 0 0 3px var(--hl-ring)}
+.fcard:hover{box-shadow:0 4px 12px var(--hl-ring)}
+.v4 .rbtn[aria-current="true"]::after{background:var(--blue)}
+.v5 .logo{background:var(--primary)}
+.v5 .tb-move{background:var(--primary)}
+.v5 .tb-move:hover{background:var(--primary-600);box-shadow:0 6px 16px color-mix(in srgb,var(--primary) 30%,transparent)}
+.aians{background:color-mix(in srgb,var(--blue) 6%,#fff)}
+.airow.sel{background:color-mix(in srgb,var(--blue) 6%,#fff)}
+/* theme picker */
+.proto .themes{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.proto .swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:6px 0 8px}
+.proto .swatch{height:34px;border:2px solid transparent;display:grid;grid-template-rows:1fr 6px;overflow:hidden;cursor:pointer;padding:0}
+.proto .swatch i{display:block}
+.proto .swatch[aria-pressed="true"]{border-color:var(--ink);outline:2px solid #fff;outline-offset:-4px}
+.proto .custom{display:flex;gap:12px;align-items:center;font-size:12px;color:var(--muted)}
+.proto .custom label{display:flex;align-items:center;gap:6px;padding:0}
+.proto .custom input[type=color]{width:28px;height:24px;border:1px solid var(--line);padding:0;background:none;cursor:pointer}
+.proto .custom button{margin-left:auto;font-size:12px;color:var(--blue);text-decoration:underline}
+
+/* =====================================================================
+   V3 · TOP BAR + EDGE AI — the dock layout pinned to the top
+   ===================================================================== */
+.dock-top .app{padding:0}
+.dock-top .chrome{position:sticky;top:0;bottom:auto;left:auto;transform:none;width:100%;z-index:70}
+.dock-top .rail{height:64px;padding:0 var(--container-pad) 0 12px;border:0;border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(16,24,40,.04),0 6px 18px rgba(16,24,40,.06)}
+.dock-top .rbtn[aria-current="true"]::after{top:auto;bottom:0}
+.dock-top .mainwrap{padding:0 var(--container-pad) 48px}
+.dock-top .proto{bottom:16px}
+.dock-top .aipanel{transform:translateY(-8px)}
+.dock-top .aipanel.open{transform:none}
+
+/* V3: colored top bar (uses the theme primary) */
+.dock-top .rail{background:var(--primary);color:#fff;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 1px 0 rgba(0,0,0,.08),0 6px 18px color-mix(in srgb,var(--primary) 25%,transparent)}
+.dock-top .logo{background:transparent}
+.dock-top .dk-nav{border-color:rgba(255,255,255,.16)}
+.dock-top .rbtn,.dock-top a.rbtn{color:rgba(255,255,255,.82)}
+.dock-top .rbtn:hover{background:rgba(255,255,255,.10);color:#fff}
+.dock-top .rbtn[aria-current="true"]{color:#fff;background:rgba(255,255,255,.14)}
+.dock-top .rbtn[aria-current="true"]::after{background:var(--blue);height:3px}
+.dock-top .rbtn .dot{box-shadow:0 0 0 2px var(--primary)}
+.dock-top .tb-scope .lpbtn{border-color:rgba(255,255,255,.35)}
+.dock-top .ai-field{border-color:transparent;background:#fff}
+.dock-top .ai:hover .ai-field{border-color:rgba(255,255,255,.6)}
+.dock-top .ai.on .ai-field{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 35%,transparent)}
+.dock-top .tb-move{background:var(--blue);color:#fff}
+.dock-top .tb-move:hover{background:var(--blue-600)}
+.dock-top .avatar{border-color:rgba(255,255,255,.35)}
+.proto .pp-head+.themes{margin-top:0;border-top:0;padding-top:0}
+.proto .pp-head+.sw{margin-top:0;border-top:0;padding-top:0;padding-bottom:10px;margin-bottom:2px;border-bottom:1px solid var(--line)}
+.proto .sw+.themes{border-top:0}
 </style>
 </head>
 <body class="v4">
@@ -428,19 +496,25 @@ main{max-width:var(--container-max);margin:0 auto;padding-top:8px}
 <div class="proto" id="proto">
   <div class="pp" role="group" aria-label="Prototype controls">
     <div class="pp-head"><b>Prototype controls</b><button id="protoClose" aria-label="Close prototype controls" title="Close">✕</button></div>
-    <h4>View as (permissions)</h4>
-    <div id="roles"></div>
+    <div class="sw"><a href="./" title="All versions" class="home">⌂</a><a href="?v=v1" data-v="v1">V1</a><a href="?v=v2" data-v="v2">V2</a><a href="?v=v3" data-v="v3">V3</a></div>
+    <div class="themes"><h4>Demo colors</h4>
+    <div class="swatches" id="swatches" role="group" aria-label="Color presets"></div>
+    <div class="custom"><label>Primary <input type="color" id="cPrim" aria-label="Primary color"></label><label>Highlight <input type="color" id="cHl" aria-label="Highlight color"></label><button id="cReset">Reset</button></div></div>
     <label class="gtog"><input type="checkbox" id="gridTog"> Show layout grid <kbd>⇧G</kbd></label>
-    <div class="sw"><a href="./" title="All versions">⌂</a><a href="app.html?v=v1" data-v="v1">V1</a><a href="app.html?v=v2" data-v="v2">V2</a><a href="app.html?v=v4" data-v="v4">V4</a><a href="app.html?v=v5" data-v="v5">V5</a></div>
   </div>
   <button aria-expanded="false" id="protoBtn">⚙ Prototype</button>
 </div>
 
 <script>
-const LAYOUT=(()=>{const v=new URLSearchParams(location.search).get('v');return ['v1','v2','v4','v5'].includes(v)?v:(window.__DEFAULT_LAYOUT||'v4')})();
-const VNAME={v1:'V1 · Left rail + sub-nav',v2:'V2 · Left rail + tabs',v4:'V4 · Top nav',v5:'V5 · Bottom nav + AI'}[LAYOUT];
-document.body.className=LAYOUT;
-document.querySelectorAll('.sw a[data-v]').forEach(a=>a.classList.toggle('on',a.dataset.v===LAYOUT));
+/* V3 = the bottom-dock layout (with Edge AI) moved to the top; it reuses the 'v5' layout code with DOCK_TOP */
+const VPARAM=(()=>{const ok=x=>['v1','v2','v3'].includes(x);const q=new URLSearchParams(location.search).get('v');if(ok(q))return q;let s=null;try{s=sessionStorage.getItem('edge-proto-v');sessionStorage.removeItem('edge-proto-v')}catch(e){}if(ok(s))return s;return window.__DEFAULT_LAYOUT||'v3'})();
+const LAYOUT=VPARAM==='v3'?'v5':VPARAM;const DOCK_TOP=VPARAM==='v3';
+const VNAME={v1:'V1 · Left rail + sub-nav',v2:'V2 · Left rail + tabs',v3:'V3 · Top bar + Edge AI'}[VPARAM];
+document.body.className=LAYOUT+(DOCK_TOP?' dock-top':'');
+document.querySelectorAll('.sw a[data-v]').forEach(a=>a.classList.toggle('on',a.dataset.v===VPARAM));
+/* version switcher: same file, switch by query (works locally, in Cowork and on GitHub Pages); home link only on the hosted site */
+document.querySelectorAll('.sw a[data-v]').forEach(a=>a.onclick=e=>{e.preventDefault();const v=a.dataset.v;if(/^https?:$/.test(location.protocol)&&/github\.io$/.test(location.hostname)){location.href='?v='+v;return}try{sessionStorage.setItem('edge-proto-v',v)}catch(_){}try{history.replaceState(null,'',location.pathname+location.search)}catch(_){}location.reload()});
+if(!/github\.io$/.test(location.hostname)){const h=document.querySelector('.sw a.home');if(h)h.remove()}
 const LOGO='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAFP0lEQVR4nO1aXUhbZxh+ThmDCo0j7mKQZHcN1QUUuijJbvwrTBopZJh4YZt40WrnjMxFHCbNzRSWLc1mwtS5iybDi6awM5yRCc6fGxNSvRFSXeNlEujFLJhCdvntonySxpzfnLhS+tye+H7fc773fb7nfY/Mu0PP8Cbgwv+9AaXwlsjrhnMh0qZPEE1DltRyjXdqGfyK9gnx2u6hUZtGoViP8OoEYZM2phZr1exEvH0+suLtQipjxtXxDBNedcNl+Q5b00bSpEsrfjqM0vLr7FwkX1gC+DtnwNfRWeSOda+cgOt6gIz2BsAm7QjF3ciXPZcLxYi06RPE03cPqosFTP46i1TGzLlBrTpLRnvvw2p6iNCKG+FVd9VkqiaiUWeJ1+ZDq34Hkc07CMfFb6pJmyZzd50ghEF4dQLV1E9VRFyWALnVuYiN/R5MRmdlb8JqihGX5Xsc5AyYefSNrHSTVezdzWtka+Zj0qpPYGQhwktCo84Sj81HrKZHnAXOJu3MwP3f8aL4HrZnjPA7xiTLtaQTadMnyKglgEZtGqH4BKKbt3nfHD2x+roCAGB9/1PBN65VZ8mU3YdGTVpSuokm4u3zEUfXIkJxt2AddDevEY/NC21DruJzMYpF040QBiM/P8BB1sC7piARITkthUadJX7nGNr0Cd6YAJD7RyfqjYuVa8Ea8dh8uAAGbLKflwQAXGtZE0UCALTvZ+F3uAQvyN+SdqQyZlhNMd7Yoor9Ut0J/A4X5u46eYswsnmb6Zjaxfp+j5iwAF4SWvZ0VyxwlyVAlr1dyB/rcJj7iDeOYGodLXxwZuNSclzDUSdcCK24cZgzwGPzIn/8IcJxN1IZM7P0lZWwCTvYpF1eanFsEktfWiEkqe2ePSa84pYU29UbgN/hQmRjCANBluFzCKWQbRrF5nho1c10TO2CTfaLjn2YMwhKezmqdr98OU6Re65jJqM/Mjem/0L+WFvtkhWhmI23mmLYnjFi9HqA83QOcgam3bPHTEZnUSiqJMW/dPGE97kgETk5vjVt5LQkGnWWXGteEx3P2blI9oJ68qJYj8cZM+fvBInIyXFaP+VyTeW08K8KN4MsAIBLrtv0CfKHp4s4O3/ByEIEA0GW4bvHJHktarulSiqbtKNVv/OKnGoasmR7xojLw88Y4KxcF4oqSW2BpBo5yBmYyMad04XEwmqKgU3088ppuVynjsxgk3bRa4gmUnrUA0EWN6Y3JKXb4yPu/C4FTWVq6fnEoxSCRDTqLJkfHiRzw06s7/eg3bvLpDJmhkqqVEsiBqVy/Zn5Ia94UAgSWfZ2obvlT9z8ga2Yr7nnOubz+QfMZHRW8TuCyvXTvAF+hwvdLWucZASJ0Kbop6FBQUuSynwia8NcuKJ9QpbGrcR4eQeFogoqnrtEdI2ItSRKoXwudpg38P5e8s0uxpJUA3oBXtGl0eHZFS2/skemVlMMVlMMoRU3UWIuVToXG1mI8M7FKqHq2a+rNwCrKUbCqxOy/p62x43atOS5WCkUGWLT+jmRaASBl6q4sd+DgSBb1akK1ogUSaUKJwVi5mLzw4OkUZNG/ljHGUeQCLXdteoj+Gqh1GReHc/wdouiVItOAqVYkmogZZJJIVp+a2lJKOgFeC49e60sSfkFeG49u9wpSTnkXoDlqLpnl9NBAkCTLg0AENsBCkGR4YOUKQmV029vjSEUd5+2BdXuQdGPoaVTknJCqrrCGTmVm0aVoPjHUIrS74QUqYz5tGdXer2aEaGgH25ST82Sp4dSUHMi54W3/4vyuuGNIfIf49MG/dwBZJIAAAAASUVORK5CYII=';
 const $=s=>document.querySelector(s);
 const hist=(m,u)=>{try{history[m](null,'',u)}catch(e){}};
@@ -809,7 +883,7 @@ function aiParse(raw){
   return R}
 const SUGG=['Which facility has the most past due?','Show leads at Eastside','Start a move-in at Northgate','Switch to North region','Which facility has the most vacant units?','Remind me to call James tomorrow'];
 function aiPanel(){let p=$('#aipanel');if(!p){p=document.createElement('div');p.id='aipanel';p.className='aipanel';p.setAttribute('role','listbox');p.setAttribute('aria-label','Edge AI results');document.body.appendChild(p);p.onclick=e=>e.stopPropagation()}return p}
-function aiPlace(){const f=$('#ai');if(!f)return;const r=f.getBoundingClientRect(),p=aiPanel(),w=Math.min(560,innerWidth-16);let left=r.left+r.width/2-w/2;left=Math.max(8,Math.min(left,innerWidth-8-w));Object.assign(p.style,{left:left+'px',width:w+'px',bottom:(innerHeight-r.top+10)+'px',maxHeight:(r.top-24)+'px'})}
+function aiPlace(){const f=$('#ai');if(!f)return;const r=f.getBoundingClientRect(),p=aiPanel(),w=Math.min(560,innerWidth-16);let left=r.left+r.width/2-w/2;left=Math.max(8,Math.min(left,innerWidth-8-w));if(DOCK_TOP){Object.assign(p.style,{left:left+'px',width:w+'px',top:(r.bottom+10)+'px',bottom:'auto',maxHeight:(innerHeight-r.bottom-24)+'px'});return}Object.assign(p.style,{left:left+'px',width:w+'px',bottom:(innerHeight-r.top+10)+'px',maxHeight:(r.top-24)+'px'})}
 function aiClose(){AI.open=false;const p=$('#aipanel');if(p)p.classList.remove('open');const i=$('#aiq');if(i)i.setAttribute('aria-expanded','false');$('#ai')&&$('#ai').classList.remove('on')}
 function aiShow(q){AI.open=true;const p=aiPanel();aiPlace();p.classList.add('open');$('#aiq').setAttribute('aria-expanded','true');$('#ai').classList.add('on');
   clearTimeout(AI.timer);
@@ -909,7 +983,7 @@ let tT;function flash(h){const t=$('#toast');t.innerHTML=h;t.classList.add('show
 function announce(s){$('#live').textContent=s}
 
 /* ---------- prototype panel ---------- */
-function renderRoles(){$('#roles').innerHTML=Object.entries(ROLES).map(([k,r])=>`<label><input type="radio" name="role" value="${k}" ${S.role===k?'checked':''}><span><b>${r.n}</b><small>${r.d}</small></span></label>`).join('');
+function renderRoles(){if(!$('#roles'))return;$('#roles').innerHTML=Object.entries(ROLES).map(([k,r])=>`<label><input type="radio" name="role" value="${k}" ${S.role===k?'checked':''}><span><b>${r.n}</b><small>${r.d}</small></span></label>`).join('');
   document.querySelectorAll('[name=role]').forEach(i=>i.onchange=()=>{S.role=i.value;S.scope='all';render(true);flash(`Viewing as ${ROLES[i.value].n}`)})}
 
 $('#proto').onclick=e=>e.stopPropagation();
@@ -921,6 +995,21 @@ $('#protoClose').onclick=e=>{e.stopPropagation();setProto(false);$('#protoBtn').
 (()=>{let closed=false;try{closed=localStorage.getItem(protoKey)==='1'}catch(e){}setProto(!closed)})();
 addEventListener('resize',()=>{moveUL(document.querySelector('.tabs'))});
 
+
+/* ---------- demo color themes ---------- */
+const THEMES=[{n:'Slate + Blue',p:'#1E293B',h:'#0667E8'},{n:'Cobalt + Blue',p:'#090C9B',h:'#0667E8'},{n:'Deep navy + Blue',p:'#002B63',h:'#0667E8'}];
+const themeKey='edge-proto-theme';
+function applyTheme(p,h,save=true){const r=document.documentElement.style;r.setProperty('--primary',p);r.setProperty('--blue',h);
+  $('#cPrim').value=p;$('#cHl').value=h;
+  document.querySelectorAll('#swatches .swatch').forEach(s=>s.setAttribute('aria-pressed',s.dataset.p.toLowerCase()===p.toLowerCase()&&s.dataset.h.toLowerCase()===h.toLowerCase()));
+  if(save){try{localStorage.setItem(themeKey,JSON.stringify({p,h}))}catch(e){}}}
+$('#swatches').innerHTML=THEMES.map(x=>`<button class="swatch" data-p="${x.p}" data-h="${x.h}" title="${x.n}" aria-label="${x.n}"><i style="background:${x.p}"></i><i style="background:${x.h}"></i></button>`).join('');
+$('#swatches').querySelectorAll('.swatch').forEach(s=>s.onclick=()=>{applyTheme(s.dataset.p,s.dataset.h);flash(`Theme: ${s.title}`)});
+$('#cPrim').oninput=e=>applyTheme(e.target.value,$('#cHl').value);
+$('#cHl').oninput=e=>applyTheme($('#cPrim').value,e.target.value);
+$('#cReset').onclick=()=>{applyTheme(THEMES[0].p,THEMES[0].h);flash('Theme reset to Slate + Blue')};
+(()=>{let s=null;try{s=JSON.parse(localStorage.getItem(themeKey)||'null')}catch(e){}const q=new URLSearchParams(location.search);const qp=q.get('primary'),qh=q.get('highlight');
+  if(qp||qh)applyTheme('#'+(qp||THEMES[0].p.slice(1)),'#'+(qh||THEMES[0].h.slice(1)),false);else if(s&&s.p)applyTheme(s.p,s.h,false);else applyTheme(THEMES[0].p,THEMES[0].h,false)})();
 function buildGrid(){const n=getComputedStyle(document.documentElement).getPropertyValue('--grid-cols').trim()|0;const g=$('#gridov');if(g.children.length!==n)g.innerHTML=Array.from({length:n},(_,i)=>`<i data-n="${String(i+1).padStart(2,'0')}"></i>`).join('')}
 function setGrid(on){buildGrid();$('#gridov').classList.toggle('on',on);$('#gridTog').checked=on}
 $('#gridTog').onchange=e=>setGrid(e.target.checked);
